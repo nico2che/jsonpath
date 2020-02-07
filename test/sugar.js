@@ -17,14 +17,6 @@ suite('sugar', function() {
     assert.equal(data.z.a, 101);
   });
 
-  test('apply method applies survives structural changes', function() {
-    var data = {a: {b: [1, {c: [2,3]}]}};
-    jp.apply(data, '$..*[?(@.length > 1)]', function(array) {
-      return array.reverse();
-    });
-    assert.deepEqual(data.a.b, [{c: [3, 2]}, 1]);
-  });
-
   test('value method gets us a value', function() {
     var data = { a: 1, b: 2, c: 3, z: { a: 100, b: 200 } };
     var b = jp.value(data, '$..b')
@@ -55,12 +47,6 @@ suite('sugar', function() {
     assert.equal(v1, 4);
     assert.equal(v2, 5);
     assert.deepEqual(data.a.d, [4, 5]);
-  });
-
-  test('value method sets non-literal key', function() {
-    var data = { "list": [ { "index": 0, "value": "default" }, { "index": 1, "value": "default" } ] };
-    jp.value(data, '$.list[?(@.index == 1)].value', "test");
-    assert.equal(data.list[1].value, "test");
   });
 
   test('paths with a count gets us back count many paths', function() {

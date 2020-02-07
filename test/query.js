@@ -59,11 +59,6 @@ suite('query', function() {
     ]);
   });
 
-  test('last book in order via expression', function() {
-    var results = jp.nodes(data, '$..book[(@.length-1)]');
-    assert.deepEqual(results, [ { path: ['$', 'store', 'book', 3], value: data.store.book[3] }]);
-  });
-
   test('first two books via union', function() {
     var results = jp.nodes(data, '$..book[0,1]');
     assert.deepEqual(results, [
@@ -77,22 +72,6 @@ suite('query', function() {
     assert.deepEqual(results, [
       { path: ['$', 'store', 'book', 0], value: data.store.book[0] },
       { path: ['$', 'store', 'book', 1], value: data.store.book[1] }
-    ]);
-  });
-
-  test('filter all books with isbn number', function() {
-    var results = jp.nodes(data, '$..book[?(@.isbn)]');
-    assert.deepEqual(results, [
-      { path: ['$', 'store', 'book', 2], value: data.store.book[2] },
-      { path: ['$', 'store', 'book', 3], value: data.store.book[3] }
-    ]);
-  });
-
-  test('filter all books with a price less than 10', function() {
-    var results = jp.nodes(data, '$..book[?(@.price<10)]');
-    assert.deepEqual(results, [
-      { path: ['$', 'store', 'book', 0], value: data.store.book[0] },
-      { path: ['$', 'store', 'book', 2], value: data.store.book[2] }
     ]);
   });
 
@@ -305,12 +284,6 @@ suite('query', function() {
     ]);
   });
 
-
-  test('nested parentheses eval', function() {
-    var pathExpression = '$..book[?( @.price && (@.price + 20 || false) )]'
-    var results = jp.query(data, pathExpression);
-    assert.deepEqual(results, data.store.book);
-  });
 
   test('array indexes from 0 to 100', function() {
     var data = [];
