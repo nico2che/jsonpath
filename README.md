@@ -1,5 +1,7 @@
 # simple-jsonpath
 
+[![npm](https://img.shields.io/npm/v/simple-jsonpath)](https://www.npmjs.com/package/simple-jsonpath)
+
 > Query JavaScript objects with JSONPath expressions. Robust / safe JSONPath engine for Node.js.
 
 This is a fork from [jsonpath](https://github.com/dchester/jsonpath). Please, go to the original README to get a full documentation.
